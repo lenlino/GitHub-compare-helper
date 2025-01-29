@@ -12,11 +12,11 @@ function drawElements() {
 	if (isPullRequestPage) {
 		buttonDestinationClass = 'TableObject gh-header-meta';
 	} else {
-		buttonDestinationClass = 'file-navigation';
+		buttonDestinationClass = '[data-testid="date-picker-commits"]';
 	}
 
-	const buttonDestination = document.getElementsByClassName(buttonDestinationClass)[0];
-	commitListItems = Array.from(document.getElementsByClassName('commit'));
+	const buttonDestination = document.querySelectorAll(buttonDestinationClass)[0];
+	commitListItems = Array.from(document.querySelectorAll('[data-testid="commit-row-item"]'));
 
 	addGenerateCompareUrlButton(buttonDestination);
 	addCheckboxes();
@@ -34,7 +34,7 @@ function addGenerateCompareUrlButton(buttonDestination) {
 
 	generateCompareUrlButton.appendChild(textNode);
 
-	buttonDestination.prepend(generateCompareUrlButton);
+	buttonDestination.parentNode.insertBefore(generateCompareUrlButton, buttonDestination.nextSibling);
 
 	function generateCompareUrl() {
 		let checkboxes,
@@ -121,7 +121,7 @@ function addCheckboxes() {
 		let sha,
 			checkbox;
 
-		sha = listItem.getElementsByClassName('sha')[0].text.trim();
+		sha = listItem.getAttribute('data-commit-link').split('commit/')[1].trim();
 
 		checkbox = document.createElement('input');
 		checkbox.type = 'checkbox';
