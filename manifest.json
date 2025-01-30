@@ -4,11 +4,12 @@
 	"description": "Adds UI to GitHub commits pages to easier create GitHub compare urls",
 	"author": "Henrik Gunnarsson",
 	"background": {
-		"scripts": ["background.js"],
-		"persistent": false
+		"service_worker": "background.js"
 	},
 	"permissions" : [
-		"tabs",
+		"tabs"
+	],
+	"host_permissions": [
 		"https://github.com/*/commits/*"
 	],
 	"icons" : {
@@ -16,5 +17,5 @@
 		"48" : "icon-48.png",
 		"128" : "icon-128.png"
 	},
-	"manifest_version": 2
+	"manifest_version": 3
 }
