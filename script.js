@@ -14,8 +14,17 @@ function drawElements() {
 	} else {
 		buttonDestinationClass = '[data-testid="date-picker-commits"]';
 	}
+	
 
 	const buttonDestination = document.querySelectorAll(buttonDestinationClass)[0];
+
+	if (!buttonDestination) {
+        console.error('Button destination element not found.');
+
+		setTimeout(drawElements, 2000);
+        return;
+    }
+
 	commitListItems = Array.from(document.querySelectorAll('[data-testid="commit-row-item"]'));
 
 	addGenerateCompareUrlButton(buttonDestination);
@@ -86,7 +95,7 @@ function addGenerateCompareUrlButton(buttonDestination) {
 			return repoUrl + githubCompareUrlLastPart;
 		}
 		
-		window.location.href = githubCompareUrl;
+		window.open(githubCompareUrl, '_blank');
 	}
 }
 
